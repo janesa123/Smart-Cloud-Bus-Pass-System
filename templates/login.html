@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Sign in — SmartBus Cloud{% endblock %}
+{% block content %}
+<section class="form-section"><div class="container"><div class="form-shell">
+  <div class="form-intro"><span class="eyebrow">Welcome back</span><h1>Continue your journey</h1><p>Sign in to access your passes and bookings.</p></div>
+  <form method="post">
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="mb-3"><label class="form-label" for="email">Email address</label><input class="form-control" type="email" id="email" name="email" required autocomplete="email" autofocus></div>
+    <div class="mb-3"><label class="form-label" for="password">Password</label><input class="form-control" type="password" id="password" name="password" required autocomplete="current-password"></div>
+    <button class="btn btn-primary w-100" type="submit">Sign in</button>
+    <p class="form-footer">New here? <a href="{{ url_for('register') }}">Create an account</a></p>
+  </form>
+</div></div></section>
+{% endblock %}

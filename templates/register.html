@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Create account — SmartBus Cloud{% endblock %}
+{% block content %}
+<section class="form-section"><div class="container"><div class="form-shell wide">
+  <div class="form-intro"><span class="eyebrow">Join SmartBus Cloud</span><h1>Create your travel account</h1><p>One account gives you instant access to digital passes and journey history.</p></div>
+  <form method="post" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="row g-3">
+      <div class="col-md-6"><label class="form-label" for="full_name">Full name</label><input class="form-control" id="full_name" name="full_name" maxlength="100" value="{{ request.form.get('full_name', '') }}" required autocomplete="name"></div>
+      <div class="col-md-6"><label class="form-label" for="email">Email address</label><input class="form-control" type="email" id="email" name="email" value="{{ request.form.get('email', '') }}" required autocomplete="email"></div>
+      <div class="col-md-6"><label class="form-label" for="phone">Phone number</label><input class="form-control" id="phone" name="phone" maxlength="20" value="{{ request.form.get('phone', '') }}" required autocomplete="tel"></div>
+      <div class="col-md-6"><label class="form-label" for="password">Password</label><input class="form-control" type="password" id="password" name="password" minlength="8" required autocomplete="new-password"><div class="form-text">At least 8 characters, with a letter and number.</div></div>
+      <div class="col-12"><label class="form-label" for="address">Address</label><textarea class="form-control" id="address" name="address" rows="3" maxlength="300" required autocomplete="street-address">{{ request.form.get('address', '') }}</textarea></div>
+    </div>
+    <button class="btn btn-primary w-100 mt-4" type="submit">Create my account</button>
+    <p class="form-footer">Already registered? <a href="{{ url_for('login') }}">Sign in</a></p>
+  </form>
+</div></div></section>
+{% endblock %}

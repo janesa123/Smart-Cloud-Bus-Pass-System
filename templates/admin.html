@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+{% block title %}Admin overview — SmartBus Cloud{% endblock %}
+{% block content %}
+<section class="dashboard-header admin-header"><div class="container"><span class="eyebrow light">Operations center</span><h1>Good day, {{ session.get('admin_name', 'Administrator') }}</h1><p>Here is the current network snapshot.</p></div></section>
+<section class="dashboard-body"><div class="container">
+  <div class="row g-3 stat-row"><div class="col-md-4"><div class="stat-card"><span>Registered users</span><strong>{{ stats['users'] }}</strong></div></div><div class="col-md-4"><div class="stat-card"><span>Total passes</span><strong>{{ stats['passes'] }}</strong></div></div><div class="col-md-4"><div class="stat-card accent"><span>Active passes</span><strong>{{ stats['active'] }}</strong></div></div></div>
+  <div class="row g-4 mt-1"><div class="col-lg-8"><div class="content-card"><div class="card-heading"><div><span class="eyebrow">System activity</span><h2>Recent passes</h2></div><a href="{{ url_for('admin_passes') }}">Manage all</a></div>
+  {% if passes %}<div class="table-responsive"><table class="table align-middle"><thead><tr><th>User</th><th>Route</th><th>Type</th><th>Status</th></tr></thead><tbody>{% for pass in passes %}<tr><td><strong>{{ pass['full_name'] }}</strong><br><small>{{ pass['pass_id'] }}</small></td><td>{{ pass['source'] }} &rarr; {{ pass['destination'] }}</td><td>{{ pass['pass_type'] }}</td><td><span class="status status-{{ pass['status']|lower }}">{{ pass['status'] }}</span></td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty-state"><p>No pass activity yet.</p></div>{% endif %}
+  </div></div><div class="col-lg-4"><div class="content-card"><div class="card-heading"><div><span class="eyebrow">Quick access</span><h2>Management</h2></div></div><div class="admin-links"><a href="{{ url_for('admin_users') }}"><strong>Manage users</strong><span>Search, review, and delete accounts &rarr;</span></a><a href="{{ url_for('admin_passes') }}"><strong>Manage passes</strong><span>Filter and change pass status &rarr;</span></a></div></div></div></div>
+</div></section>
+{% endblock %}

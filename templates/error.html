@@ -1,0 +1,5 @@
+{% extends "base.html" %}
+{% block title %}Error {{ code }} — SmartBus Cloud{% endblock %}
+{% block content %}
+<section class="form-section"><div class="container"><div class="error-card"><span>{{ code }}</span><h1>We hit a roadblock</h1><p>{{ message }}</p><a class="btn btn-primary" href="{{ url_for('index') }}">Return home</a></div></div></section>
+{% endblock %}

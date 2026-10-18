@@ -1,0 +1,22 @@
+{% extends "base.html" %}
+{% block title %}{{ bus_pass['pass_id'] }} — SmartBus Cloud{% endblock %}
+{% block content %}
+<section class="pass-page"><div class="container">
+  <div class="print-actions"><a href="{{ url_for('history') }}">&larr; My passes</a><button class="btn btn-primary" type="button" onclick="window.print()">Print pass</button></div>
+  <article class="digital-pass">
+    <div class="pass-brand"><div><span class="brand-mark">SB</span><strong>SmartBus Cloud</strong></div><span class="status status-{{ bus_pass['status']|lower }}">{{ bus_pass['status'] }}</span></div>
+    <div class="pass-route"><span>{{ bus_pass['source'] }}</span><div><i></i><strong>&rarr;</strong><i></i></div><span>{{ bus_pass['destination'] }}</span></div>
+    <div class="pass-content">
+      <div class="pass-details">
+        <div><small>Passenger</small><strong>{{ bus_pass['passenger_name'] }}</strong></div>
+        <div><small>Pass type</small><strong>{{ bus_pass['pass_type'] }}</strong></div>
+        <div><small>Valid from</small><strong>{{ bus_pass['issue_date'] }}</strong></div>
+        <div><small>Valid until</small><strong>{{ bus_pass['expiry_date'] }}</strong></div>
+      </div>
+      <div class="qr-panel"><img src="{{ url_for('static', filename=bus_pass['qr_code_path']) }}" alt="QR code for pass {{ bus_pass['pass_id'] }}"><small>Scan to verify</small></div>
+    </div>
+    <div class="pass-footer"><span>PASS ID</span><strong>{{ bus_pass['pass_id'] }}</strong><small>Issued {{ bus_pass['created_at'] }}</small></div>
+  </article>
+  <p class="print-note">Present this pass and QR code when boarding. A screenshot or printed copy may be used.</p>
+</div></section>
+{% endblock %}

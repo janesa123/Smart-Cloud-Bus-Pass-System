@@ -1,0 +1,24 @@
+{% extends "base.html" %}
+{% block title %}Profile — SmartBus Cloud{% endblock %}
+{% block content %}
+<section class="page-header compact"><div class="container"><span class="eyebrow light">Account settings</span><h1>Your profile</h1><p>Keep your personal and security details up to date.</p></div></section>
+<section class="dashboard-body"><div class="container"><div class="row g-4">
+  <div class="col-lg-7"><div class="content-card"><div class="card-heading"><div><span class="eyebrow">Personal details</span><h2>Profile information</h2></div></div>
+    <form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="action" value="profile">
+      <div class="mb-3"><label class="form-label" for="full_name">Full name</label><input class="form-control" id="full_name" name="full_name" value="{{ user['full_name'] }}" maxlength="100" required></div>
+      <div class="mb-3"><label class="form-label">Email address</label><input class="form-control" value="{{ user['email'] }}" disabled><div class="form-text">Email cannot be changed.</div></div>
+      <div class="mb-3"><label class="form-label" for="phone">Phone number</label><input class="form-control" id="phone" name="phone" value="{{ user['phone'] }}" maxlength="20" required></div>
+      <div class="mb-3"><label class="form-label" for="address">Address</label><textarea class="form-control" id="address" name="address" rows="3" maxlength="300" required>{{ user['address'] }}</textarea></div>
+      <button class="btn btn-primary" type="submit">Save changes</button>
+    </form>
+  </div></div>
+  <div class="col-lg-5"><div class="content-card"><div class="card-heading"><div><span class="eyebrow">Security</span><h2>Change password</h2></div></div>
+    <form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><input type="hidden" name="action" value="password">
+      <div class="mb-3"><label class="form-label" for="current_password">Current password</label><input class="form-control" type="password" id="current_password" name="current_password" required autocomplete="current-password"></div>
+      <div class="mb-3"><label class="form-label" for="new_password">New password</label><input class="form-control" type="password" id="new_password" name="new_password" minlength="8" required autocomplete="new-password"></div>
+      <div class="mb-3"><label class="form-label" for="confirm_password">Confirm password</label><input class="form-control" type="password" id="confirm_password" name="confirm_password" required autocomplete="new-password"></div>
+      <button class="btn btn-outline-primary" type="submit">Update password</button>
+    </form>
+  </div></div>
+</div></div></section>
+{% endblock %}

@@ -1,0 +1,29 @@
+{% extends "base.html" %}
+{% block title %}Dashboard — SmartBus Cloud{% endblock %}
+{% block content %}
+<section class="dashboard-header"><div class="container">
+  <span class="eyebrow light">Your travel hub</span><h1>Hello, {{ current_user['full_name'].split()[0] }}</h1><p>Where are you heading next?</p>
+</div></section>
+<section class="dashboard-body"><div class="container">
+  <div class="row g-3 stat-row">
+    <div class="col-sm-6 col-lg-4"><div class="stat-card"><span>Total passes</span><strong>{{ stats['total'] or 0 }}</strong></div></div>
+    <div class="col-sm-6 col-lg-4"><div class="stat-card accent"><span>Active now</span><strong>{{ stats['active'] or 0 }}</strong></div></div>
+    <div class="col-lg-4"><a class="action-card" href="{{ url_for('book_pass') }}"><span>Book a new pass</span><strong>Start booking &rarr;</strong></a></div>
+  </div>
+  <div class="content-card mt-4">
+    <div class="card-heading"><div><span class="eyebrow">Latest activity</span><h2>Recent passes</h2></div><a href="{{ url_for('history') }}">View all</a></div>
+    {% if passes %}
+      <div class="table-responsive"><table class="table align-middle"><thead><tr><th>Pass</th><th>Route</th><th>Type</th><th>Expires</th><th>Status</th><th></th></tr></thead><tbody>
+      {% for pass in passes %}<tr><td><strong>{{ pass['pass_id'] }}</strong></td><td>{{ pass['source'] }} <span class="route-arrow">&rarr;</span> {{ pass['destination'] }}</td><td>{{ pass['pass_type'] }}</td><td>{{ pass['expiry_date'] }}</td><td><span class="status status-{{ pass['status']|lower }}">{{ pass['status'] }}</span></td><td><a class="btn btn-sm btn-outline-primary" href="{{ url_for('view_pass', pass_record_id=pass['id']) }}">Open</a></td></tr>{% endfor %}
+      </tbody></table></div>
+    {% else %}
+      <div class="empty-state"><div class="empty-icon">P</div><h3>No passes yet</h3><p>Your booked passes will appear here.</p><a class="btn btn-primary" href="{{ url_for('book_pass') }}">Book your first pass</a></div>
+    {% endif %}
+  </div>
+  <div class="shortcut-grid mt-4">
+    <a href="{{ url_for('book_pass') }}"><span>+</span><div><strong>Book bus pass</strong><small>Create a new travel pass</small></div></a>
+    <a href="{{ url_for('history') }}"><span>H</span><div><strong>Booking history</strong><small>Review every journey</small></div></a>
+    <a href="{{ url_for('profile') }}"><span>U</span><div><strong>Profile</strong><small>Update your account</small></div></a>
+  </div>
+</div></section>
+{% endblock %}

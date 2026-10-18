@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}Manage users — SmartBus Cloud{% endblock %}
+{% block content %}
+<section class="page-header compact"><div class="container"><span class="eyebrow light">Administration</span><h1>Registered users</h1><p>Search and manage passenger accounts.</p></div></section>
+<section class="dashboard-body"><div class="container"><div class="content-card">
+  <form class="search-bar" method="get"><label class="visually-hidden" for="q">Search users</label><input class="form-control" id="q" name="q" value="{{ query }}" placeholder="Search by name or email"><button class="btn btn-primary" type="submit">Search</button>{% if query %}<a class="btn btn-outline-secondary" href="{{ url_for('admin_users') }}">Clear</a>{% endif %}</form>
+  {% if users %}<div class="table-responsive"><table class="table align-middle"><thead><tr><th>User</th><th>Phone</th><th>Joined</th><th>Passes</th><th></th></tr></thead><tbody>{% for user in users %}<tr><td><strong>{{ user['full_name'] }}</strong><br><small>{{ user['email'] }}</small></td><td>{{ user['phone'] }}</td><td>{{ user['created_at'][:10] }}</td><td>{{ user['pass_count'] }}</td><td><a class="btn btn-sm btn-outline-primary" href="{{ url_for('admin_user_detail', user_id=user['id']) }}">View</a></td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty-state"><div class="empty-icon">U</div><h2>No users found</h2><p>{% if query %}Try a different search term.{% else %}New registrations will appear here.{% endif %}</p></div>{% endif %}
+</div></div></section>
+{% endblock %}

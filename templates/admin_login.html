@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}Administrator sign in — SmartBus Cloud{% endblock %}
+{% block content %}
+<section class="form-section"><div class="container"><div class="form-shell">
+  <div class="admin-seal">ADMIN</div><div class="form-intro"><span class="eyebrow">Restricted access</span><h1>Administrator portal</h1><p>Sign in with an authorized administrator account.</p></div>
+  <form method="post"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="mb-3"><label class="form-label" for="email">Admin email</label><input class="form-control" type="email" id="email" name="email" required autocomplete="username"></div>
+    <div class="mb-3"><label class="form-label" for="password">Password</label><input class="form-control" type="password" id="password" name="password" required autocomplete="current-password"></div>
+    <button class="btn btn-primary w-100" type="submit">Access dashboard</button>
+  </form>
+</div></div></section>
+{% endblock %}

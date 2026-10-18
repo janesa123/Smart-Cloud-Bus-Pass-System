@@ -1,0 +1,10 @@
+{% extends "base.html" %}
+{% block title %}Booking confirmed — SmartBus Cloud{% endblock %}
+{% block content %}
+<section class="form-section"><div class="container"><div class="success-card">
+  <div class="success-check">&#10003;</div><span class="eyebrow">Booking confirmed</span><h1>Your pass is ready</h1>
+  <p>{{ bus_pass['source'] }} to {{ bus_pass['destination'] }} is booked. Keep your digital pass ready when you board.</p>
+  <div class="confirmation-id"><span>Pass ID</span><strong>{{ bus_pass['pass_id'] }}</strong></div>
+  <div class="d-flex flex-wrap justify-content-center gap-3"><a class="btn btn-primary" href="{{ url_for('view_pass', pass_record_id=bus_pass['id']) }}">View digital pass</a><a class="btn btn-outline-primary" href="{{ url_for('dashboard') }}">Back to dashboard</a></div>
+</div></div></section>
+{% endblock %}

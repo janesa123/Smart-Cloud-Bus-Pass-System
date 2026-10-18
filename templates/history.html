@@ -1,0 +1,12 @@
+{% extends "base.html" %}
+{% block title %}My passes — SmartBus Cloud{% endblock %}
+{% block content %}
+<section class="page-header compact"><div class="container d-flex flex-column flex-md-row justify-content-between align-items-md-end gap-3"><div><span class="eyebrow light">Travel records</span><h1>My passes</h1><p>Every booking, all in one place.</p></div><a class="btn btn-light" href="{{ url_for('book_pass') }}">Book new pass</a></div></section>
+<section class="dashboard-body"><div class="container"><div class="content-card">
+  {% if passes %}
+  <div class="table-responsive"><table class="table align-middle"><thead><tr><th>Booked</th><th>Route</th><th>Pass</th><th>Expiry</th><th>Status</th><th></th></tr></thead><tbody>
+  {% for pass in passes %}<tr><td>{{ pass['created_at'][:10] }}</td><td><strong>{{ pass['source'] }}</strong><br><small>to {{ pass['destination'] }}</small></td><td>{{ pass['pass_type'] }}<br><small>{{ pass['pass_id'] }}</small></td><td>{{ pass['expiry_date'] }}</td><td><span class="status status-{{ pass['status']|lower }}">{{ pass['status'] }}</span></td><td><a class="btn btn-sm btn-outline-primary" href="{{ url_for('view_pass', pass_record_id=pass['id']) }}">View pass</a></td></tr>{% endfor %}
+  </tbody></table></div>
+  {% else %}<div class="empty-state"><div class="empty-icon">P</div><h2>No booking history</h2><p>Book your first pass to start your journey.</p><a class="btn btn-primary" href="{{ url_for('book_pass') }}">Book a pass</a></div>{% endif %}
+</div></div></section>
+{% endblock %}

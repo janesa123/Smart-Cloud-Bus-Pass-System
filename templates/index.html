@@ -1,0 +1,48 @@
+{% extends "base.html" %}
+{% block title %}SmartBus Cloud — Travel made effortless{% endblock %}
+{% block content %}
+<section class="hero-section">
+  <div class="container">
+    <div class="row align-items-center g-5">
+      <div class="col-lg-6">
+        <span class="eyebrow">A better way to move</span>
+        <h1>Your bus pass.<br><span>Always within reach.</span></h1>
+        <p class="hero-copy">Book, manage, and carry a secure digital bus pass from any device. No queues, no paper, no missed journeys.</p>
+        <div class="d-flex flex-wrap gap-3">
+          <a class="btn btn-primary btn-lg" href="{{ url_for('register') }}">Get your digital pass</a>
+          <a class="btn btn-outline-primary btn-lg" href="{{ url_for('login') }}">Sign in</a>
+        </div>
+        <div class="hero-proof">
+          <div><strong>24/7</strong><span>Pass access</span></div>
+          <div><strong>3</strong><span>Flexible plans</span></div>
+          <div><strong>100%</strong><span>Digital</span></div>
+        </div>
+      </div>
+      <div class="col-lg-6">
+        <div class="route-visual">
+          <div class="route-top"><span>LIVE ROUTE</span><span class="live-dot">On time</span></div>
+          <div class="bus-illustration" aria-label="Stylized city bus">
+            <div class="bus-window"></div><div class="bus-window"></div><div class="bus-window"></div>
+            <div class="bus-door"></div><div class="bus-light"></div>
+          </div>
+          <div class="route-line"><i></i><span></span><i></i><span></span><i></i></div>
+          <div class="d-flex justify-content-between route-labels"><span>Central</span><span>University</span><span>Tech Park</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+<section class="section-pad" id="about">
+  <div class="container">
+    <div class="section-heading">
+      <span class="eyebrow">Built for everyday travel</span>
+      <h2>Everything you need, minus the paperwork</h2>
+    </div>
+    <div class="row g-4">
+      <div class="col-md-4"><div class="feature-card"><span class="feature-number">01</span><h3>Book in minutes</h3><p>Choose your route and pass duration through one clear, guided form.</p></div></div>
+      <div class="col-md-4"><div class="feature-card"><span class="feature-number">02</span><h3>Travel with confidence</h3><p>Every pass has a unique ID and scannable QR code for secure verification.</p></div></div>
+      <div class="col-md-4"><div class="feature-card"><span class="feature-number">03</span><h3>Stay in control</h3><p>View current status, expiry dates, and your complete booking history anytime.</p></div></div>
+    </div>
+  </div>
+</section>
+{% endblock %}

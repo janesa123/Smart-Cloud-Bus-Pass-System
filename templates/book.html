@@ -1,0 +1,21 @@
+{% extends "base.html" %}
+{% block title %}Book a pass — SmartBus Cloud{% endblock %}
+{% block content %}
+<section class="page-header"><div class="container"><span class="eyebrow light">New booking</span><h1>Plan your next journey</h1><p>Choose a route and the pass that fits your schedule.</p></div></section>
+<section class="dashboard-body"><div class="container"><div class="form-shell booking-shell">
+  <form method="post" novalidate>
+    <input type="hidden" name="csrf_token" value="{{ csrf_token() }}">
+    <div class="form-section-title"><span>1</span><div><h2>Passenger</h2><p>Who will use this pass?</p></div></div>
+    <div class="mb-4"><label class="form-label" for="passenger_name">Passenger name</label><input class="form-control" id="passenger_name" name="passenger_name" maxlength="100" value="{{ request.form.get('passenger_name', user['full_name']) }}" required></div>
+    <div class="form-section-title"><span>2</span><div><h2>Route & validity</h2><p>Tell us where and when you travel.</p></div></div>
+    <div class="row g-3">
+      <div class="col-md-6"><label class="form-label" for="source">From</label><input class="form-control" id="source" name="source" maxlength="100" value="{{ request.form.get('source', '') }}" placeholder="e.g. Central Station" required></div>
+      <div class="col-md-6"><label class="form-label" for="destination">To</label><input class="form-control" id="destination" name="destination" maxlength="100" value="{{ request.form.get('destination', '') }}" placeholder="e.g. University Gate" required></div>
+      <div class="col-md-6"><label class="form-label" for="pass_type">Pass type</label><select class="form-select" id="pass_type" name="pass_type" required><option value="">Choose a pass</option>{% for type in ['Daily', 'Weekly', 'Monthly'] %}<option value="{{ type }}" {% if request.form.get('pass_type') == type %}selected{% endif %}>{{ type }}</option>{% endfor %}</select></div>
+      <div class="col-md-6"><label class="form-label" for="issue_date">Starts on</label><input class="form-control" type="date" id="issue_date" name="issue_date" min="{{ today }}" value="{{ request.form.get('issue_date', today) }}" required></div>
+    </div>
+    <div class="pass-options mt-4"><div><strong>Daily</strong><span>1 day</span></div><div><strong>Weekly</strong><span>7 days</span></div><div><strong>Monthly</strong><span>30 days</span></div></div>
+    <button class="btn btn-primary btn-lg w-100 mt-4" type="submit">Confirm and create pass</button>
+  </form>
+</div></div></section>
+{% endblock %}

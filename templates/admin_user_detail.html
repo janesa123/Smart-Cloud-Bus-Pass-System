@@ -1,0 +1,9 @@
+{% extends "base.html" %}
+{% block title %}{{ user['full_name'] }} — Admin{% endblock %}
+{% block content %}
+<section class="page-header compact"><div class="container"><a class="back-link light" href="{{ url_for('admin_users') }}">&larr; All users</a><h1>{{ user['full_name'] }}</h1><p>{{ user['email'] }}</p></div></section>
+<section class="dashboard-body"><div class="container"><div class="row g-4">
+  <div class="col-lg-4"><div class="content-card"><span class="eyebrow">Account details</span><dl class="detail-list"><dt>Phone</dt><dd>{{ user['phone'] }}</dd><dt>Address</dt><dd>{{ user['address'] }}</dd><dt>Joined</dt><dd>{{ user['created_at'] }}</dd></dl><form method="post" action="{{ url_for('admin_delete_user', user_id=user['id']) }}" onsubmit="return confirm('Delete this user and every associated pass? This cannot be undone.')"><input type="hidden" name="csrf_token" value="{{ csrf_token() }}"><button class="btn btn-outline-danger w-100" type="submit">Delete user</button></form></div></div>
+  <div class="col-lg-8"><div class="content-card"><div class="card-heading"><div><span class="eyebrow">Travel records</span><h2>Passes</h2></div></div>{% if passes %}<div class="table-responsive"><table class="table"><thead><tr><th>Pass</th><th>Route</th><th>Expires</th><th>Status</th></tr></thead><tbody>{% for pass in passes %}<tr><td>{{ pass['pass_id'] }}<br><small>{{ pass['pass_type'] }}</small></td><td>{{ pass['source'] }} &rarr; {{ pass['destination'] }}</td><td>{{ pass['expiry_date'] }}</td><td><span class="status status-{{ pass['status']|lower }}">{{ pass['status'] }}</span></td></tr>{% endfor %}</tbody></table></div>{% else %}<div class="empty-state"><p>This user has no passes.</p></div>{% endif %}</div></div>
+</div></div></section>
+{% endblock %}
