@@ -136,3 +136,5 @@ The password prompt is hidden and requires confirmation. No production credentia
 - **CSRF/form expired error:** refresh the page before submitting. Do not reuse a form opened before the server restarted with a changed secret.
 - **QR image missing:** ensure `static/qrcodes` is writable and Pillow installed through `qrcode[pil]`.
 - **Reset local data:** stop the app and delete `instance/bus_pass.db` plus generated PNG files. Restarting recreates an empty database.
+DEVELOPED BY
+Janessa J 
